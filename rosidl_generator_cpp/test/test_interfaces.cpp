@@ -13,7 +13,9 @@
 // limitations under the License.
 
 #include <gtest/gtest.h>
-
+#include <climits>
+#include <cfloat>
+#include <cstdint>
 #include "rosidl_generator_cpp/msg/empty.hpp"
 
 #include "rosidl_generator_cpp/msg/bounded_array_bounded.hpp"
@@ -97,3 +99,73 @@ TEST(Test_rosidl_generator_traits, has_fixed_size) {
       rosidl_generator_cpp::msg::UnboundedArrayUnbounded>::value,
     "UnboundedArrayUnbounded::has_fixed_size is true");
 }
+
+TEST(Test_messages, primitives_static) {
+  rosidl_generator_cpp::msg::PrimitivesStatic message;
+
+  message.bool_value = false;
+  ASSERT_EQ(false, message.bool_value);
+  message.bool_value = true;
+  ASSERT_EQ(true, message.bool_value);
+
+  message.byte_value = 0;
+  ASSERT_EQ(0, message.byte_value);
+  message.byte_value = 255;
+  ASSERT_EQ(255, message.byte_value);
+
+  message.char_value = CHAR_MIN;
+  ASSERT_EQ(CHAR_MIN, message.char_value);
+  message.char_value = CHAR_MAX;
+  ASSERT_EQ(CHAR_MAX, message.char_value);
+
+  message.float32_value = FLT_MIN;
+  ASSERT_EQ(FLT_MIN, message.float32_value);
+  message.float32_value = FLT_MAX;
+  ASSERT_EQ(FLT_MAX, message.float32_value);
+
+  message.float64_value = DBL_MIN;
+  ASSERT_EQ(DBL_MIN, message.float64_value);
+  message.float64_value = DBL_MAX;
+  ASSERT_EQ(DBL_MAX, message.float64_value);
+
+  message.int8_value = INT8_MIN;
+  ASSERT_EQ(INT8_MIN, message.int8_value);
+  message.int8_value = INT8_MAX;
+  ASSERT_EQ(INT8_MAX, message.int8_value);
+
+  message.uint8_value = 0;
+  ASSERT_EQ(0, message.uint8_value);
+  message.uint8_value = UINT8_MAX;
+  ASSERT_EQ(UINT8_MAX, message.uint8_value);
+
+  message.int16_value = INT16_MIN;
+  ASSERT_EQ(INT16_MIN, message.int16_value);
+  message.int16_value = INT16_MAX;
+  ASSERT_EQ(INT16_MAX, message.int16_value);
+
+  message.uint16_value = 0;
+  ASSERT_EQ(0, message.uint16_value);
+  message.uint16_value = UINT16_MAX;
+  ASSERT_EQ(UINT16_MAX, message.uint16_value);
+
+  message.int32_value = INT32_MIN;
+  ASSERT_EQ(INT32_MIN, message.int32_value);
+  message.int32_value = INT32_MAX;
+  ASSERT_EQ(INT32_MAX, message.int32_value);
+
+  message.uint32_value = 0;
+  ASSERT_EQ(0, message.uint32_value);
+  message.uint32_value = UINT32_MAX;
+  ASSERT_EQ(UINT32_MAX, message.uint32_value);
+
+  message.int64_value = INT64_MIN;
+  ASSERT_EQ(INT64_MIN, message.int64_value);
+  message.int64_value = INT64_MAX;
+  ASSERT_EQ(INT64_MAX, message.int64_value);
+
+  message.uint64_value = 0;
+  ASSERT_EQ(0, message.uint64_value);
+  message.uint64_value = UINT64_MAX;
+  ASSERT_EQ(UINT64_MAX, message.uint64_value);
+}
+

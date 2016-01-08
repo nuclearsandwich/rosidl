@@ -13,9 +13,13 @@
 // limitations under the License.
 
 #include <gtest/gtest.h>
+#include <iostream>
 #include <climits>
 #include <cfloat>
 #include <cstdint>
+#include <algorithm>
+#include "test_array_generator.hpp"
+
 #include "rosidl_generator_cpp/msg/empty.hpp"
 
 #include "rosidl_generator_cpp/msg/bounded_array_bounded.hpp"
@@ -169,3 +173,62 @@ TEST(Test_messages, primitives_static) {
   ASSERT_EQ(UINT64_MAX, message.uint64_value);
 }
 
+/**
+ * Check if the arrays are identical element by element.
+ */
+template<class T, std::size_t SIZE>
+void assert_array(const std::array<T, SIZE> & a, const std::array<T, SIZE> & b)
+{
+  int i;
+
+  for (i = 0; i < SIZE; i++) {
+    ASSERT_EQ(a[i], b[i]);
+  }
+}
+
+// Primitives bounded arrays
+TEST(Test_messages, primitives_bounded) {
+  rosidl_generator_cpp::msg::PrimitivesBounded message;
+
+  // bool
+  std::array<bool, 10> * pattern_bool = new std::array<bool, 10>;
+  test_array_bool<10>(pattern_bool);
+  std::copy_n(pattern_bool->begin(), 10, message.bool_value.begin());
+  assert_array<bool, 10>(*pattern_bool, message.bool_value);
+  delete pattern_bool;
+
+  // char
+  std::array<char, 10> * pattern_char = new std::array<char, 10>;
+  test_array_char<10>(pattern_char);
+  std::copy_n(pattern_char->begin(), 10, message.char_value.begin());
+  assert_array<char, 10>(*pattern_char, message.char_value);
+  delete pattern_char;
+
+  // byte
+  std::array<uint8_t, 10> * pattern_uint8 = new std::array<uint8_t, 10>;
+  test_array_uint8<10>(pattern_uint8);
+  std::copy_n(pattern_uint8->begin(), 10, message.byte_value.begin());
+  assert_array<uint8_t, 10>(*pattern_uint8, message.byte_value);
+  delete pattern_uint8;
+
+  // float
+  std::array<float, 10> * pattern_float = new std::array<float, 10>;
+  test_array_float<10>(pattern_float);
+  std::copy_n(pattern_float->begin(), 10, message.float32_value.begin());
+  assert_array<float, 10>(*pattern_float, message.float32_value);
+  delete pattern_float;
+
+  // float64
+  std::array<double, 10> * pattern_double = new std::array<double, 10>;
+  test_array_double<10>(pattern_double);
+  std::copy_n(pattern_double->begin(), 10, message.float64_value.begin());
+  assert_array<double, 10>(*pattern_double, message.float64_value);
+  delete pattern_double;
+
+  // int32
+  std::array<int32_t, 10> * pattern_int32 = new std::array<int32_t, 10>;
+  test_array_int32<10>(pattern_int32);
+  std::copy_n(pattern_int32->begin(), 10, message.int32_value.begin());
+  assert_array<int32_t, 10>(*pattern_int32, message.int32_value);
+  delete pattern_int32;
+}

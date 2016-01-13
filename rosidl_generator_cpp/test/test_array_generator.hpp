@@ -146,6 +146,48 @@ void test_array_uint8(std::array<uint8_t, SIZE> * dst_array)
  * Mininum and maximum for the type and random values in the middle.
  */
 template<std::size_t SIZE>
+void test_array_int16(std::array<int16_t, SIZE> * dst_array)
+{
+  int i;
+
+  std::default_random_engine rand_generator;
+  std::uniform_int_distribution<int16_t> randnum(INT16_MIN, INT16_MAX);
+
+  if (SIZE > 0) {
+    (*dst_array)[0] = INT16_MIN;
+    for (i = 1; i < SIZE - 1; i++) {
+      (*dst_array)[i] = randnum(rand_generator);
+    }
+    (*dst_array)[SIZE - 1] = INT16_MAX;
+  }
+}
+
+/**
+ * Helper function to generate a test pattern for integer type.
+ * Mininum and maximum for the type and random values in the middle.
+ */
+template<std::size_t SIZE>
+void test_array_uint16(std::array<uint16_t, SIZE> * dst_array)
+{
+  int i;
+
+  std::default_random_engine rand_generator;
+  std::uniform_int_distribution<uint16_t> randnum(0, UINT16_MAX);
+
+  if (SIZE > 0) {
+    (*dst_array)[0] = 0;
+    for (i = 1; i < SIZE - 1; i++) {
+      (*dst_array)[i] = randnum(rand_generator);
+    }
+    (*dst_array)[SIZE - 1] = UINT16_MAX;
+  }
+}
+
+/**
+ * Helper function to generate a test pattern for integer type.
+ * Mininum and maximum for the type and random values in the middle.
+ */
+template<std::size_t SIZE>
 void test_array_int32(std::array<int32_t, SIZE> * dst_array)
 {
   int i;
@@ -159,6 +201,69 @@ void test_array_int32(std::array<int32_t, SIZE> * dst_array)
       (*dst_array)[i] = randnum(rand_generator);
     }
     (*dst_array)[SIZE - 1] = INT32_MAX;
+  }
+}
+
+/**
+ * Helper function to generate a test pattern for integer type.
+ * Mininum and maximum for the type and random values in the middle.
+ */
+template<std::size_t SIZE>
+void test_array_uint32(std::array<uint32_t, SIZE> * dst_array)
+{
+  int i;
+
+  std::default_random_engine rand_generator;
+  std::uniform_int_distribution<uint32_t> randnum(0, UINT32_MAX);
+
+  if (SIZE > 0) {
+    (*dst_array)[0] = 0;
+    for (i = 1; i < SIZE - 1; i++) {
+      (*dst_array)[i] = randnum(rand_generator);
+    }
+    (*dst_array)[SIZE - 1] = UINT32_MAX;
+  }
+}
+
+/**
+ * Helper function to generate a test pattern for integer type.
+ * Mininum and maximum for the type and random values in the middle.
+ */
+template<std::size_t SIZE>
+void test_array_int64(std::array<int64_t, SIZE> * dst_array)
+{
+  int i;
+
+  std::default_random_engine rand_generator;
+  std::uniform_int_distribution<int64_t> randnum(INT64_MIN, INT64_MAX);
+
+  if (SIZE > 0) {
+    (*dst_array)[0] = INT64_MIN;
+    for (i = 1; i < SIZE - 1; i++) {
+      (*dst_array)[i] = randnum(rand_generator);
+    }
+    (*dst_array)[SIZE - 1] = INT64_MAX;
+  }
+}
+
+/**
+ * Helper function to generate a test pattern for integer type.
+ * Mininum and maximum for the type and random values in the middle.
+ */
+template<std::size_t SIZE>
+void test_array_uint64(std::array<uint64_t, SIZE> * dst_array)
+{
+  int i;
+
+  std::default_random_engine rand_generator;
+  std::uniform_int_distribution<uint64_t> randnum(0, UINT64_MAX);
+
+  if (SIZE > 0) {
+    (*dst_array)[0] = 0;
+    for (i = 1; i < SIZE - 1; i++) {
+      (*dst_array)[i] = randnum(rand_generator);
+    }
+    (*dst_array)[SIZE - 1] = UINT64_MAX;
   }
 }
 

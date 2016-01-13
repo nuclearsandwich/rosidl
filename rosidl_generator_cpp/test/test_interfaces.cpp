@@ -17,6 +17,7 @@
 #include <climits>
 #include <cfloat>
 #include <cstdint>
+#include <string>
 #include <algorithm>
 #include "test_array_generator.hpp"
 
@@ -205,13 +206,13 @@ TEST(Test_messages, primitives_bounded) {
   delete pattern_char;
 
   // byte
-  std::array<uint8_t, 10> * pattern_uint8 = new std::array<uint8_t, 10>;
-  test_array_uint8<10>(pattern_uint8);
-  std::copy_n(pattern_uint8->begin(), 10, message.byte_value.begin());
-  assert_array<uint8_t, 10>(*pattern_uint8, message.byte_value);
-  delete pattern_uint8;
+  std::array<uint8_t, 10> * pattern_byte = new std::array<uint8_t, 10>;
+  test_array_uint8<10>(pattern_byte);
+  std::copy_n(pattern_byte->begin(), 10, message.byte_value.begin());
+  assert_array<uint8_t, 10>(*pattern_byte, message.byte_value);
+  delete pattern_byte;
 
-  // float
+  // float32
   std::array<float, 10> * pattern_float = new std::array<float, 10>;
   test_array_float<10>(pattern_float);
   std::copy_n(pattern_float->begin(), 10, message.float32_value.begin());
@@ -225,10 +226,64 @@ TEST(Test_messages, primitives_bounded) {
   assert_array<double, 10>(*pattern_double, message.float64_value);
   delete pattern_double;
 
+  // int8
+  std::array<int8_t, 10> * pattern_int8 = new std::array<int8_t, 10>;
+  test_array_int8<10>(pattern_int8);
+  std::copy_n(pattern_int8->begin(), 10, message.int8_value.begin());
+  assert_array<int8_t, 10>(*pattern_int8, message.int8_value);
+  delete pattern_int8;
+
+  // uint8
+  std::array<uint8_t, 10> * pattern_uint8 = new std::array<uint8_t, 10>;
+  test_array_uint8<10>(pattern_uint8);
+  std::copy_n(pattern_uint8->begin(), 10, message.uint8_value.begin());
+  assert_array<uint8_t, 10>(*pattern_uint8, message.uint8_value);
+  delete pattern_uint8;
+
+  // int16
+  std::array<int16_t, 10> * pattern_int16 = new std::array<int16_t, 10>;
+  test_array_int16<10>(pattern_int16);
+  std::copy_n(pattern_int16->begin(), 10, message.int16_value.begin());
+  assert_array<int16_t, 10>(*pattern_int16, message.int16_value);
+  delete pattern_int16;
+
+  // uint16
+  std::array<uint16_t, 10> * pattern_uint16 = new std::array<uint16_t, 10>;
+  test_array_uint16<10>(pattern_uint16);
+  std::copy_n(pattern_uint16->begin(), 10, message.uint16_value.begin());
+  assert_array<uint16_t, 10>(*pattern_uint16, message.uint16_value);
+  delete pattern_uint16;
+
   // int32
   std::array<int32_t, 10> * pattern_int32 = new std::array<int32_t, 10>;
   test_array_int32<10>(pattern_int32);
   std::copy_n(pattern_int32->begin(), 10, message.int32_value.begin());
   assert_array<int32_t, 10>(*pattern_int32, message.int32_value);
   delete pattern_int32;
+
+  // uint32
+  std::array<uint32_t, 10> * pattern_uint32 = new std::array<uint32_t, 10>;
+  test_array_uint32<10>(pattern_uint32);
+  std::copy_n(pattern_uint32->begin(), 10, message.uint32_value.begin());
+  assert_array<uint32_t, 10>(*pattern_uint32, message.uint32_value);
+  delete pattern_uint32;
+
+  // int64
+  std::array<int64_t, 10> * pattern_int64 = new std::array<int64_t, 10>;
+  test_array_int64<10>(pattern_int64);
+  std::copy_n(pattern_int64->begin(), 10, message.int64_value.begin());
+  assert_array<int64_t, 10>(*pattern_int64, message.int64_value);
+  delete pattern_int64;
+
+  // uint64
+  std::array<uint64_t, 10> * pattern_uint64 = new std::array<uint64_t, 10>;
+  test_array_uint64<10>(pattern_uint64);
+  std::copy_n(pattern_uint64->begin(), 10, message.uint64_value.begin());
+  assert_array<uint64_t, 10>(*pattern_uint64, message.uint64_value);
+  delete pattern_uint64;
+
+  // string
+  std::string pattern_string = "Deep into that darkness peering";
+  message.string_value = pattern_string;
+  ASSERT_EQ(0, pattern_string.compare(message.string_value));
 }

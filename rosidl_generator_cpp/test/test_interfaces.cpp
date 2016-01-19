@@ -200,73 +200,73 @@ TEST(Test_messages, primitives_bounded) {
 
   // char
   std::array<char, TEST_VECTOR_SIZE> pattern_char;
-  test_array_integer_type<char, TEST_VECTOR_SIZE, CHAR_MIN, CHAR_MAX>(&pattern_char);
+  test_array_integer_type<char, TEST_VECTOR_SIZE>(&pattern_char, CHAR_MIN, CHAR_MAX);
   std::copy_n(pattern_char.begin(), TEST_VECTOR_SIZE, message.char_value.begin());
   assert_array<char, TEST_VECTOR_SIZE>(pattern_char, message.char_value);
 
   // byte
   std::array<uint8_t, TEST_VECTOR_SIZE> pattern_byte;
-  test_array_integer_type<uint8_t, TEST_VECTOR_SIZE, 0, UINT8_MAX>(&pattern_byte);
+  test_array_integer_type<uint8_t, TEST_VECTOR_SIZE>(&pattern_byte, 0, UINT8_MAX);
   std::copy_n(pattern_byte.begin(), TEST_VECTOR_SIZE, message.byte_value.begin());
   assert_array<uint8_t, 10>(pattern_byte, message.byte_value);
 
   // float32
   std::array<float, TEST_VECTOR_SIZE> pattern_float;
-  test_array_float<TEST_VECTOR_SIZE>(&pattern_float);
+  test_array_float_type<float, TEST_VECTOR_SIZE>(&pattern_float, FLT_MIN, FLT_MAX);
   std::copy_n(pattern_float.begin(), TEST_VECTOR_SIZE, message.float32_value.begin());
   assert_array<float, TEST_VECTOR_SIZE>(pattern_float, message.float32_value);
 
   // float64
   std::array<double, TEST_VECTOR_SIZE> pattern_double;
-  test_array_double<TEST_VECTOR_SIZE>(&pattern_double);
+  test_array_float_type<double, TEST_VECTOR_SIZE>(&pattern_double, DBL_MIN, DBL_MAX);
   std::copy_n(pattern_double.begin(), TEST_VECTOR_SIZE, message.float64_value.begin());
   assert_array<double, TEST_VECTOR_SIZE>(pattern_double, message.float64_value);
 
   // int8
   std::array<int8_t, TEST_VECTOR_SIZE> pattern_int8;
-  test_array_integer_type<int8_t, TEST_VECTOR_SIZE, INT8_MIN, INT8_MAX>(&pattern_int8);
+  test_array_integer_type<int8_t, TEST_VECTOR_SIZE>(&pattern_int8, INT8_MIN, INT8_MAX);
   std::copy_n(pattern_int8.begin(), TEST_VECTOR_SIZE, message.int8_value.begin());
   assert_array<int8_t, TEST_VECTOR_SIZE>(pattern_int8, message.int8_value);
 
   // uint8
   std::array<uint8_t, TEST_VECTOR_SIZE> pattern_uint8;
-  test_array_integer_type<uint8_t, TEST_VECTOR_SIZE, 0, UINT8_MAX>(&pattern_uint8);
+  test_array_integer_type<uint8_t, TEST_VECTOR_SIZE>(&pattern_uint8, 0, UINT8_MAX);
   std::copy_n(pattern_uint8.begin(), TEST_VECTOR_SIZE, message.uint8_value.begin());
   assert_array<uint8_t, TEST_VECTOR_SIZE>(pattern_uint8, message.uint8_value);
 
   // int16
   std::array<int16_t, TEST_VECTOR_SIZE> pattern_int16;
-  test_array_integer_type<int16_t, TEST_VECTOR_SIZE, INT16_MIN, INT16_MAX>(&pattern_int16);
+  test_array_integer_type<int16_t, TEST_VECTOR_SIZE>(&pattern_int16, INT16_MIN, INT16_MAX);
   std::copy_n(pattern_int16.begin(), TEST_VECTOR_SIZE, message.int16_value.begin());
   assert_array<int16_t, TEST_VECTOR_SIZE>(pattern_int16, message.int16_value);
 
   // uint16
   std::array<uint16_t, TEST_VECTOR_SIZE> pattern_uint16;
-  test_array_integer_type<uint16_t, TEST_VECTOR_SIZE, 0, UINT16_MAX>(&pattern_uint16);
+  test_array_integer_type<uint16_t, TEST_VECTOR_SIZE>(&pattern_uint16, 0, UINT16_MAX);
   std::copy_n(pattern_uint16.begin(), TEST_VECTOR_SIZE, message.uint16_value.begin());
   assert_array<uint16_t, TEST_VECTOR_SIZE>(pattern_uint16, message.uint16_value);
 
   // int32
   std::array<int32_t, TEST_VECTOR_SIZE> pattern_int32;
-  test_array_integer_type<int32_t, TEST_VECTOR_SIZE, INT32_MIN, INT32_MAX>(&pattern_int32);
+  test_array_integer_type<int32_t, TEST_VECTOR_SIZE>(&pattern_int32, INT32_MIN, INT32_MAX);
   std::copy_n(pattern_int32.begin(), TEST_VECTOR_SIZE, message.int32_value.begin());
   assert_array<int32_t, TEST_VECTOR_SIZE>(pattern_int32, message.int32_value);
 
   // uint32
   std::array<uint32_t, TEST_VECTOR_SIZE> pattern_uint32;
-  test_array_integer_type<uint32_t, TEST_VECTOR_SIZE, 0, UINT32_MAX>(&pattern_uint32);
+  test_array_integer_type<uint32_t, TEST_VECTOR_SIZE>(&pattern_uint32, 0, UINT32_MAX);
   std::copy_n(pattern_uint32.begin(), TEST_VECTOR_SIZE, message.uint32_value.begin());
   assert_array<uint32_t, TEST_VECTOR_SIZE>(pattern_uint32, message.uint32_value);
 
   // int64
   std::array<int64_t, TEST_VECTOR_SIZE> pattern_int64;
-  test_array_integer_type<int64_t, TEST_VECTOR_SIZE, INT64_MIN, INT64_MAX>(&pattern_int64);
+  test_array_integer_type<int64_t, TEST_VECTOR_SIZE>(&pattern_int64, INT64_MIN, INT64_MAX);
   std::copy_n(pattern_int64.begin(), TEST_VECTOR_SIZE, message.int64_value.begin());
   assert_array<int64_t, TEST_VECTOR_SIZE>(pattern_int64, message.int64_value);
 
   // uint64
   std::array<uint64_t, TEST_VECTOR_SIZE> pattern_uint64;
-  test_array_integer_type<uint64_t, TEST_VECTOR_SIZE, 0, UINT64_MAX>(&pattern_uint64);
+  test_array_integer_type<uint64_t, TEST_VECTOR_SIZE>(&pattern_uint64, 0, UINT64_MAX);
   std::copy_n(pattern_uint64.begin(), TEST_VECTOR_SIZE, message.uint64_value.begin());
   assert_array<uint64_t, TEST_VECTOR_SIZE>(pattern_uint64, message.uint64_value);
 

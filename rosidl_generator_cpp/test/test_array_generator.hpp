@@ -25,9 +25,7 @@
 template<std::size_t SIZE>
 void test_array_bool(std::array<bool, SIZE> * dst_array)
 {
-  int i;
-
-  for (i = 0; i < SIZE; i++) {
+  for (int i = 0; i < SIZE; i++) {
     if ((i % 2) == 0) {
       (*dst_array)[i] = true;
     } else {
@@ -38,60 +36,40 @@ void test_array_bool(std::array<bool, SIZE> * dst_array)
 
 /**
  * Helper function to generate a test pattern for integer number types.
- * It uses a template for the type and range parameters. Type must be
- * an integer type.
+ * The template type parameter must be an integer number type.
  * Mininum and maximum values for the type and random values in the middle.
  */
-template<typename T, std::size_t SIZE, T MIN, T MAX>
-void test_array_integer_type(std::array<T, SIZE> * dst_array)
+template<typename T, std::size_t SIZE>
+void test_array_integer_type(std::array<T, SIZE> * dst_array, T min, T max)
 {
   std::default_random_engine rand_generator;
-  std::uniform_int_distribution<T> randnum(MIN, MAX);
+  std::uniform_int_distribution<T> randnum(min, max);
 
   if (SIZE > 0) {
-    (*dst_array)[0] = MIN;
+    (*dst_array)[0] = min;
     for (int i = 1; i < SIZE - 1; i++) {
       (*dst_array)[i] = randnum(rand_generator);
     }
-    (*dst_array)[SIZE - 1] = MAX;
+    (*dst_array)[SIZE - 1] = max;
   }
 }
 
 /**
- * Helper function to generate a test pattern for float type.
+ * Helper function to generate a test pattern for float number types.
  * Mininum and maximum values for the type and random numbers in the middle.
  */
-template<std::size_t SIZE>
-void test_array_float(std::array<float, SIZE> * dst_array)
+template<typename T, std::size_t SIZE>
+void test_array_float_type(std::array<T, SIZE> * dst_array, T min, T max)
 {
   std::default_random_engine rand_generator;
-  std::uniform_real_distribution<float> randnum(FLT_MIN, FLT_MAX);
+  std::uniform_real_distribution<T> randnum(min, max);
 
   if (SIZE > 0) {
-    (*dst_array)[0] = FLT_MIN;
+    (*dst_array)[0] = min;
     for (int i = 1; i < SIZE - 1; i++) {
       (*dst_array)[i] = randnum(rand_generator);
     }
-    (*dst_array)[SIZE - 1] = FLT_MAX;
-  }
-}
-
-/**
- * Helper function to generate a test pattern for double float type.
- * Mininum and maximum for the type and random numbers in the middle.
- */
-template<std::size_t SIZE>
-void test_array_double(std::array<double, SIZE> * dst_array)
-{
-  std::default_random_engine rand_generator;
-  std::uniform_real_distribution<double> randnum(DBL_MIN, DBL_MAX);
-
-  if (SIZE > 0) {
-    (*dst_array)[0] = DBL_MIN;
-    for (int i = 1; i < SIZE - 1; i++) {
-      (*dst_array)[i] = randnum(rand_generator);
-    }
-    (*dst_array)[SIZE - 1] = DBL_MAX;
+    (*dst_array)[SIZE - 1] = max;
   }
 }
 

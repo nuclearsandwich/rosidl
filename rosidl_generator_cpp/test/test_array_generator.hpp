@@ -20,16 +20,16 @@
 
 /**
  * Helper function to generate a test pattern for boolean type.
- * Alternates true and false values.
+ * Alternating true (even index) and false (odd index) pattern.
  */
-template<std::size_t SIZE>
-void test_array_bool(std::array<bool, SIZE> * dst_array)
+template<typename C>
+void test_vector_bool(C & container, int size)
 {
-  for (int i = 0; i < SIZE; i++) {
+  for (int i = 0; i < size; i++) {
     if ((i % 2) == 0) {
-      (*dst_array)[i] = true;
+      container[i] = true;
     } else {
-      (*dst_array)[i] = false;
+      container[i] = false;
     }
   }
 }
@@ -39,18 +39,18 @@ void test_array_bool(std::array<bool, SIZE> * dst_array)
  * The template type parameter must be an integer number type.
  * Mininum and maximum values for the type and random values in the middle.
  */
-template<typename T, std::size_t SIZE>
-void test_array_integer_type(std::array<T, SIZE> * dst_array, T min, T max)
+template<typename C, typename T>
+void test_vector_integer_type(C & container, int size, T min, T max)
 {
   std::default_random_engine rand_generator;
   std::uniform_int_distribution<T> randnum(min, max);
 
-  if (SIZE > 0) {
-    (*dst_array)[0] = min;
-    for (int i = 1; i < SIZE - 1; i++) {
-      (*dst_array)[i] = randnum(rand_generator);
+  if (size > 0) {
+    container[0] = min;
+    for (int i = 1; i < size - 1; i++) {
+      container[i] = randnum(rand_generator);
     }
-    (*dst_array)[SIZE - 1] = max;
+    container[size - 1] = max;
   }
 }
 
@@ -58,18 +58,18 @@ void test_array_integer_type(std::array<T, SIZE> * dst_array, T min, T max)
  * Helper function to generate a test pattern for float number types.
  * Mininum and maximum values for the type and random numbers in the middle.
  */
-template<typename T, std::size_t SIZE>
-void test_array_float_type(std::array<T, SIZE> * dst_array, T min, T max)
+template<typename C, typename T>
+void test_vector_float_type(C & container, int size, T min, T max)
 {
   std::default_random_engine rand_generator;
   std::uniform_real_distribution<T> randnum(min, max);
 
-  if (SIZE > 0) {
-    (*dst_array)[0] = min;
-    for (int i = 1; i < SIZE - 1; i++) {
-      (*dst_array)[i] = randnum(rand_generator);
+  if (size > 0) {
+    container[0] = min;
+    for (int i = 1; i < size - 1; i++) {
+      container[i] = randnum(rand_generator);
     }
-    (*dst_array)[SIZE - 1] = max;
+    container[size - 1] = max;
   }
 }
 

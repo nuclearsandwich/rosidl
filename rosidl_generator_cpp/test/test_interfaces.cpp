@@ -530,3 +530,157 @@ TEST(Test_messages, static_array_bounded) {
     ASSERT_EQ(0, pattern_string.compare(message.primitive_values[i].string_value));
   }
 }
+
+// Static array of a submessage of bounded array of primitives
+TEST(Test_messages, static_array_unbounded) {
+  rosidl_generator_cpp::msg::StaticArrayUnbounded message;
+
+  // bool
+  std::vector<bool> pattern_bool(TEST_VECTOR_SIZE);
+  test_vector_bool<decltype(pattern_bool)>(pattern_bool, TEST_VECTOR_SIZE);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].bool_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_bool.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].bool_value.begin());
+    ASSERT_EQ(pattern_bool, message.primitive_values[i].bool_value);
+  }
+
+  // char
+  std::vector<char> pattern_char(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_char)>(pattern_char,
+    TEST_VECTOR_SIZE, CHAR_MIN, CHAR_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].char_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_char.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].char_value.begin());
+    ASSERT_EQ(pattern_char, message.primitive_values[i].char_value);
+  }
+
+  // byte
+  std::vector<uint8_t> pattern_byte(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_byte)>(pattern_byte,
+    TEST_VECTOR_SIZE, 0, UINT8_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].byte_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_byte.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].byte_value.begin());
+    ASSERT_EQ(pattern_byte, message.primitive_values[i].byte_value);
+  }
+
+  // float32
+  std::vector<float> pattern_float(TEST_VECTOR_SIZE);
+  test_vector_float_type<decltype(pattern_float)>(pattern_float,
+    TEST_VECTOR_SIZE, FLT_MIN, FLT_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].float32_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_float.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].float32_value.begin());
+    ASSERT_EQ(pattern_float, message.primitive_values[i].float32_value);
+  }
+
+  // float64
+  std::vector<double> pattern_double(TEST_VECTOR_SIZE);
+  test_vector_float_type<decltype(pattern_double)>(pattern_double,
+    TEST_VECTOR_SIZE, DBL_MIN, DBL_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].float64_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_double.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].float64_value.begin());
+    ASSERT_EQ(pattern_double, message.primitive_values[i].float64_value);
+  }
+
+  // int8
+  std::vector<int8_t> pattern_int8(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_int8)>(pattern_int8,
+    TEST_VECTOR_SIZE, INT8_MIN, INT8_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int8_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_int8.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].int8_value.begin());
+    ASSERT_EQ(pattern_int8, message.primitive_values[i].int8_value);
+  }
+
+  // uint8
+  std::vector<uint8_t> pattern_uint8(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_uint8)>(pattern_uint8,
+    TEST_VECTOR_SIZE, 0, UINT8_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint8_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_uint8.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].uint8_value.begin());
+    ASSERT_EQ(pattern_uint8, message.primitive_values[i].uint8_value);
+  }
+
+  // int16
+  std::vector<int16_t> pattern_int16(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_int16)>(pattern_int16,
+    TEST_VECTOR_SIZE, INT16_MIN, INT16_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int16_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_int16.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].int16_value.begin());
+    ASSERT_EQ(pattern_int16, message.primitive_values[i].int16_value);
+  }
+
+  // uint16
+  std::vector<uint16_t> pattern_uint16(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_uint16)>(pattern_uint16,
+    TEST_VECTOR_SIZE, 0, UINT16_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint16_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_uint16.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].uint16_value.begin());
+    ASSERT_EQ(pattern_uint16, message.primitive_values[i].uint16_value);
+  }
+
+  // int32
+  std::vector<int32_t> pattern_int32(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_int32)>(pattern_int32,
+    TEST_VECTOR_SIZE, INT32_MIN, INT32_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int32_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_int32.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].int32_value.begin());
+    ASSERT_EQ(pattern_int32, message.primitive_values[i].int32_value);
+  }
+
+  // uint32
+  std::vector<uint32_t> pattern_uint32(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_uint32)>(pattern_uint32,
+    TEST_VECTOR_SIZE, 0, UINT32_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint32_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_uint32.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].uint32_value.begin());
+    ASSERT_EQ(pattern_uint32, message.primitive_values[i].uint32_value);
+  }
+
+  // int64
+  std::vector<int64_t> pattern_int64(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_int64)>(pattern_int64,
+    TEST_VECTOR_SIZE, INT64_MIN, INT64_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int64_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_int64.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].int64_value.begin());
+    ASSERT_EQ(pattern_int64, message.primitive_values[i].int64_value);
+  }
+
+  // uint64
+  std::vector<uint64_t> pattern_uint64(TEST_VECTOR_SIZE);
+  test_vector_integer_type<decltype(pattern_uint64)>(pattern_uint64,
+    TEST_VECTOR_SIZE, 0, UINT64_MAX);
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint64_value.resize(TEST_VECTOR_SIZE);
+    std::copy_n(pattern_uint64.begin(), TEST_VECTOR_SIZE,
+      message.primitive_values[i].uint64_value.begin());
+    ASSERT_EQ(pattern_uint64, message.primitive_values[i].uint64_value);
+  }
+
+  // string
+  std::string pattern_string = "Deep into that darkness peering";
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].string_value = pattern_string;
+    ASSERT_EQ(0, pattern_string.compare(message.primitive_values[i].string_value));
+  }
+}

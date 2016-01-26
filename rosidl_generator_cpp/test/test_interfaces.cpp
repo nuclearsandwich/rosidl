@@ -390,7 +390,7 @@ TEST(Test_messages, primitives_unbounded) {
   ASSERT_EQ(0, pattern_string.compare(message.string_value));
 }
 
-// Static array of a submessage of static primitive
+// Static array of a submessage of bounded primitive
 TEST(Test_messages, static_array_bounded) {
   rosidl_generator_cpp::msg::StaticArrayBounded message;
 
@@ -531,7 +531,7 @@ TEST(Test_messages, static_array_bounded) {
   }
 }
 
-// Static array of a submessage of bounded array of primitives
+// Static array of a submessage of unbounded array of primitives
 TEST(Test_messages, static_array_unbounded) {
   rosidl_generator_cpp::msg::StaticArrayUnbounded message;
 
@@ -682,5 +682,101 @@ TEST(Test_messages, static_array_unbounded) {
   for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
     message.primitive_values[i].string_value = pattern_string;
     ASSERT_EQ(0, pattern_string.compare(message.primitive_values[i].string_value));
+  }
+}
+
+// Static array of a submessage of static primitive
+TEST(Test_messages, static_array_static) {
+  rosidl_generator_cpp::msg::StaticArrayStatic message;
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].bool_value = false;
+    ASSERT_EQ(false, message.primitive_values[i].bool_value);
+    message.primitive_values[i].bool_value = true;
+    ASSERT_EQ(true, message.primitive_values[i].bool_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].byte_value = 0;
+    ASSERT_EQ(0, message.primitive_values[i].byte_value);
+    message.primitive_values[i].byte_value = 255;
+    ASSERT_EQ(255, message.primitive_values[i].byte_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].char_value = CHAR_MIN;
+    ASSERT_EQ(CHAR_MIN, message.primitive_values[i].char_value);
+    message.primitive_values[i].char_value = CHAR_MAX;
+    ASSERT_EQ(CHAR_MAX, message.primitive_values[i].char_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].float32_value = FLT_MIN;
+    ASSERT_EQ(FLT_MIN, message.primitive_values[i].float32_value);
+    message.primitive_values[i].float32_value = FLT_MAX;
+    ASSERT_EQ(FLT_MAX, message.primitive_values[i].float32_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].float64_value = DBL_MIN;
+    ASSERT_EQ(DBL_MIN, message.primitive_values[i].float64_value);
+    message.primitive_values[i].float64_value = DBL_MAX;
+    ASSERT_EQ(DBL_MAX, message.primitive_values[i].float64_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int8_value = INT8_MIN;
+    ASSERT_EQ(INT8_MIN, message.primitive_values[i].int8_value);
+    message.primitive_values[i].int8_value = INT8_MAX;
+    ASSERT_EQ(INT8_MAX, message.primitive_values[i].int8_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint8_value = 0;
+    ASSERT_EQ(0, message.primitive_values[i].uint8_value);
+    message.primitive_values[i].uint8_value = UINT8_MAX;
+    ASSERT_EQ(UINT8_MAX, message.primitive_values[i].uint8_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int16_value = INT16_MIN;
+    ASSERT_EQ(INT16_MIN, message.primitive_values[i].int16_value);
+    message.primitive_values[i].int16_value = INT16_MAX;
+    ASSERT_EQ(INT16_MAX, message.primitive_values[i].int16_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint16_value = 0;
+    ASSERT_EQ(0, message.primitive_values[i].uint16_value);
+    message.primitive_values[i].uint16_value = UINT16_MAX;
+    ASSERT_EQ(UINT16_MAX, message.primitive_values[i].uint16_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int32_value = INT32_MIN;
+    ASSERT_EQ(INT32_MIN, message.primitive_values[i].int32_value);
+    message.primitive_values[i].int32_value = INT32_MAX;
+    ASSERT_EQ(INT32_MAX, message.primitive_values[i].int32_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint32_value = 0;
+    ASSERT_EQ(0, message.primitive_values[i].uint32_value);
+    message.primitive_values[i].uint32_value = UINT32_MAX;
+    ASSERT_EQ(UINT32_MAX, message.primitive_values[i].uint32_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].int64_value = INT64_MIN;
+    ASSERT_EQ(INT64_MIN, message.primitive_values[i].int64_value);
+    message.primitive_values[i].int64_value = INT64_MAX;
+    ASSERT_EQ(INT64_MAX, message.primitive_values[i].int64_value);
+  }
+
+  for (int i = 0; i < TEST_VECTOR_SIZE_2; i++) {
+    message.primitive_values[i].uint64_value = 0;
+    ASSERT_EQ(0, message.primitive_values[i].uint64_value);
+    message.primitive_values[i].uint64_value = UINT64_MAX;
+    ASSERT_EQ(UINT64_MAX, message.primitive_values[i].uint64_value);
   }
 }

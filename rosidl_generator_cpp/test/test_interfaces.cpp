@@ -183,90 +183,90 @@ TEST(Test_messages, primitives_bounded) {
 
   // bool
   std::array<bool, TEST_VECTOR_SIZE> pattern_bool;
-  test_vector_bool<std::array<bool, TEST_VECTOR_SIZE>>(pattern_bool, TEST_VECTOR_SIZE);
+  test_vector_bool<decltype(pattern_bool)>(pattern_bool, TEST_VECTOR_SIZE);
   std::copy_n(pattern_bool.begin(), TEST_VECTOR_SIZE, message.bool_value.begin());
   ASSERT_EQ(pattern_bool, message.bool_value);
 
   // char
   std::array<char, TEST_VECTOR_SIZE> pattern_char;
-  test_vector_integer_type<std::array<char, TEST_VECTOR_SIZE>, char>(pattern_char,
+  test_vector_integer_type<decltype(pattern_char)>(pattern_char,
     TEST_VECTOR_SIZE, CHAR_MIN, CHAR_MAX);
   std::copy_n(pattern_char.begin(), TEST_VECTOR_SIZE, message.char_value.begin());
   ASSERT_EQ(pattern_char, message.char_value);
 
   // byte
   std::array<uint8_t, TEST_VECTOR_SIZE> pattern_byte;
-  test_vector_integer_type<std::array<uint8_t, TEST_VECTOR_SIZE>, uint8_t>(pattern_byte,
+  test_vector_integer_type<decltype(pattern_byte)>(pattern_byte,
     TEST_VECTOR_SIZE, 0, UINT8_MAX);
   std::copy_n(pattern_byte.begin(), TEST_VECTOR_SIZE, message.byte_value.begin());
   ASSERT_EQ(pattern_byte, message.byte_value);
 
   // float32
   std::array<float, TEST_VECTOR_SIZE> pattern_float;
-  test_vector_float_type<std::array<float, TEST_VECTOR_SIZE>, float>(pattern_float,
+  test_vector_float_type<decltype(pattern_float)>(pattern_float,
     TEST_VECTOR_SIZE, FLT_MIN, FLT_MAX);
   std::copy_n(pattern_float.begin(), TEST_VECTOR_SIZE, message.float32_value.begin());
   ASSERT_EQ(pattern_float, message.float32_value);
 
   // float64
   std::array<double, TEST_VECTOR_SIZE> pattern_double;
-  test_vector_float_type<std::array<double, TEST_VECTOR_SIZE>, double>(pattern_double,
+  test_vector_float_type<decltype(pattern_double)>(pattern_double,
     TEST_VECTOR_SIZE, DBL_MIN, DBL_MAX);
   std::copy_n(pattern_double.begin(), TEST_VECTOR_SIZE, message.float64_value.begin());
   ASSERT_EQ(pattern_double, message.float64_value);
 
   // int8
   std::array<int8_t, TEST_VECTOR_SIZE> pattern_int8;
-  test_vector_integer_type<std::array<int8_t, TEST_VECTOR_SIZE>, int8_t>(pattern_int8,
+  test_vector_integer_type<decltype(pattern_int8)>(pattern_int8,
     TEST_VECTOR_SIZE, INT8_MIN, INT8_MAX);
   std::copy_n(pattern_int8.begin(), TEST_VECTOR_SIZE, message.int8_value.begin());
   ASSERT_EQ(pattern_int8, message.int8_value);
 
   // uint8
   std::array<uint8_t, TEST_VECTOR_SIZE> pattern_uint8;
-  test_vector_integer_type<std::array<uint8_t, TEST_VECTOR_SIZE>, uint8_t>(pattern_uint8,
+  test_vector_integer_type<decltype(pattern_uint8)>(pattern_uint8,
     TEST_VECTOR_SIZE, 0, UINT8_MAX);
   std::copy_n(pattern_uint8.begin(), TEST_VECTOR_SIZE, message.uint8_value.begin());
   ASSERT_EQ(pattern_uint8, message.uint8_value);
 
   // int16
   std::array<int16_t, TEST_VECTOR_SIZE> pattern_int16;
-  test_vector_integer_type<std::array<int16_t, TEST_VECTOR_SIZE>, int16_t>(pattern_int16,
+  test_vector_integer_type<decltype(pattern_int16)>(pattern_int16,
     TEST_VECTOR_SIZE, INT16_MIN, INT16_MAX);
   std::copy_n(pattern_int16.begin(), TEST_VECTOR_SIZE, message.int16_value.begin());
   ASSERT_EQ(pattern_int16, message.int16_value);
 
   // uint16
   std::array<uint16_t, TEST_VECTOR_SIZE> pattern_uint16;
-  test_vector_integer_type<std::array<uint16_t, TEST_VECTOR_SIZE>, uint16_t>(pattern_uint16,
+  test_vector_integer_type<decltype(pattern_uint16)>(pattern_uint16,
     TEST_VECTOR_SIZE, 0, UINT16_MAX);
   std::copy_n(pattern_uint16.begin(), TEST_VECTOR_SIZE, message.uint16_value.begin());
   ASSERT_EQ(pattern_uint16, message.uint16_value);
 
   // int32
   std::array<int32_t, TEST_VECTOR_SIZE> pattern_int32;
-  test_vector_integer_type<std::array<int32_t, TEST_VECTOR_SIZE>, int32_t>(pattern_int32,
+  test_vector_integer_type<decltype(pattern_int32)>(pattern_int32,
     TEST_VECTOR_SIZE, INT32_MIN, INT32_MAX);
   std::copy_n(pattern_int32.begin(), TEST_VECTOR_SIZE, message.int32_value.begin());
   ASSERT_EQ(pattern_int32, message.int32_value);
 
   // uint32
   std::array<uint32_t, TEST_VECTOR_SIZE> pattern_uint32;
-  test_vector_integer_type<std::array<uint32_t, TEST_VECTOR_SIZE>, uint32_t>(pattern_uint32,
+  test_vector_integer_type<decltype(pattern_uint32)>(pattern_uint32,
     TEST_VECTOR_SIZE, 0, UINT32_MAX);
   std::copy_n(pattern_uint32.begin(), TEST_VECTOR_SIZE, message.uint32_value.begin());
   ASSERT_EQ(pattern_uint32, message.uint32_value);
 
   // int64
   std::array<int64_t, TEST_VECTOR_SIZE> pattern_int64;
-  test_vector_integer_type<std::array<int64_t, TEST_VECTOR_SIZE>, int64_t>(pattern_int64,
+  test_vector_integer_type<decltype(pattern_int64)>(pattern_int64,
     TEST_VECTOR_SIZE, INT64_MIN, INT64_MAX);
   std::copy_n(pattern_int64.begin(), TEST_VECTOR_SIZE, message.int64_value.begin());
   ASSERT_EQ(pattern_int64, message.int64_value);
 
   // uint64
   std::array<uint64_t, TEST_VECTOR_SIZE> pattern_uint64;
-  test_vector_integer_type<std::array<uint64_t, TEST_VECTOR_SIZE>, uint64_t>(pattern_uint64,
+  test_vector_integer_type<decltype(pattern_uint64)>(pattern_uint64,
     TEST_VECTOR_SIZE, 0, UINT64_MAX);
   std::copy_n(pattern_uint64.begin(), TEST_VECTOR_SIZE, message.uint64_value.begin());
   ASSERT_EQ(pattern_uint64, message.uint64_value);
@@ -283,14 +283,14 @@ TEST(Test_messages, primitives_unbounded) {
 
   // bool
   std::vector<bool> pattern_bool(TEST_VECTOR_SIZE);
-  test_vector_bool<std::vector<bool>>(pattern_bool, TEST_VECTOR_SIZE);
+  test_vector_bool<decltype(pattern_bool)>(pattern_bool, TEST_VECTOR_SIZE);
   message.bool_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_bool.begin(), TEST_VECTOR_SIZE, message.bool_value.begin());
   ASSERT_EQ(pattern_bool, message.bool_value);
 
   // char
   std::vector<char> pattern_char(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<char>, char>(pattern_char,
+  test_vector_integer_type<decltype(pattern_char)>(pattern_char,
     TEST_VECTOR_SIZE, CHAR_MIN, CHAR_MAX);
   message.char_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_char.begin(), TEST_VECTOR_SIZE, message.char_value.begin());
@@ -298,7 +298,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // byte
   std::vector<uint8_t> pattern_byte(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<uint8_t>, uint8_t>(pattern_byte,
+  test_vector_integer_type<decltype(pattern_byte)>(pattern_byte,
     TEST_VECTOR_SIZE, 0, UINT8_MAX);
   message.byte_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_byte.begin(), TEST_VECTOR_SIZE, message.byte_value.begin());
@@ -306,7 +306,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // float32
   std::vector<float> pattern_float(TEST_VECTOR_SIZE);
-  test_vector_float_type<std::vector<float>, float>(pattern_float,
+  test_vector_float_type<decltype(pattern_float)>(pattern_float,
     TEST_VECTOR_SIZE, FLT_MIN, FLT_MAX);
   message.float32_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_float.begin(), TEST_VECTOR_SIZE, message.float32_value.begin());
@@ -314,7 +314,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // float64
   std::vector<double> pattern_double(TEST_VECTOR_SIZE);
-  test_vector_float_type<std::vector<double>, double>(pattern_double,
+  test_vector_float_type<decltype(pattern_double)>(pattern_double,
     TEST_VECTOR_SIZE, DBL_MIN, DBL_MAX);
   message.float64_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_double.begin(), TEST_VECTOR_SIZE, message.float64_value.begin());
@@ -322,7 +322,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // int8
   std::vector<int8_t> pattern_int8(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<int8_t>, int8_t>(pattern_int8,
+  test_vector_integer_type<decltype(pattern_int8)>(pattern_int8,
     TEST_VECTOR_SIZE, INT8_MIN, INT8_MAX);
   message.int8_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_int8.begin(), TEST_VECTOR_SIZE, message.int8_value.begin());
@@ -330,7 +330,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // uint8
   std::vector<uint8_t> pattern_uint8(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<uint8_t>, uint8_t>(pattern_uint8,
+  test_vector_integer_type<decltype(pattern_uint8)>(pattern_uint8,
     TEST_VECTOR_SIZE, 0, UINT8_MAX);
   message.uint8_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_uint8.begin(), TEST_VECTOR_SIZE, message.uint8_value.begin());
@@ -338,7 +338,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // int16
   std::vector<int16_t> pattern_int16(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<int16_t>, int16_t>(pattern_int16,
+  test_vector_integer_type<decltype(pattern_int16)>(pattern_int16,
     TEST_VECTOR_SIZE, INT16_MIN, INT16_MAX);
   message.int16_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_int16.begin(), TEST_VECTOR_SIZE, message.int16_value.begin());
@@ -346,7 +346,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // uint16
   std::vector<uint16_t> pattern_uint16(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<uint16_t>, uint16_t>(pattern_uint16,
+  test_vector_integer_type<decltype(pattern_uint16)>(pattern_uint16,
     TEST_VECTOR_SIZE, 0, UINT16_MAX);
   message.uint16_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_uint16.begin(), TEST_VECTOR_SIZE, message.uint16_value.begin());
@@ -354,7 +354,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // int32
   std::vector<int32_t> pattern_int32(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<int32_t>, int32_t>(pattern_int32,
+  test_vector_integer_type<decltype(pattern_int32)>(pattern_int32,
     TEST_VECTOR_SIZE, INT32_MIN, INT32_MAX);
   message.int32_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_int32.begin(), TEST_VECTOR_SIZE, message.int32_value.begin());
@@ -362,7 +362,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // uint32
   std::vector<uint32_t> pattern_uint32(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<uint32_t>, uint32_t>(pattern_uint32,
+  test_vector_integer_type<decltype(pattern_uint32)>(pattern_uint32,
     TEST_VECTOR_SIZE, 0, UINT32_MAX);
   message.uint32_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_uint32.begin(), TEST_VECTOR_SIZE, message.uint32_value.begin());
@@ -370,7 +370,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // int64
   std::vector<int64_t> pattern_int64(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<int64_t>, int64_t>(pattern_int64,
+  test_vector_integer_type<decltype(pattern_int64)>(pattern_int64,
     TEST_VECTOR_SIZE, INT64_MIN, INT64_MAX);
   message.int64_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_int64.begin(), TEST_VECTOR_SIZE, message.int64_value.begin());
@@ -378,7 +378,7 @@ TEST(Test_messages, primitives_unbounded) {
 
   // uint64
   std::vector<uint64_t> pattern_uint64(TEST_VECTOR_SIZE);
-  test_vector_integer_type<std::vector<uint64_t>, uint64_t>(pattern_uint64,
+  test_vector_integer_type<decltype(pattern_uint64)>(pattern_uint64,
     TEST_VECTOR_SIZE, 0, UINT64_MAX);
   message.uint64_value.resize(TEST_VECTOR_SIZE);
   std::copy_n(pattern_uint64.begin(), TEST_VECTOR_SIZE, message.uint64_value.begin());

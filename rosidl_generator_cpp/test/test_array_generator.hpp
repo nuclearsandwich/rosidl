@@ -39,11 +39,12 @@ void test_vector_bool(C & container, int size)
  * The template type parameter must be an integer number type.
  * Mininum and maximum values for the type and random values in the middle.
  */
-template<typename C, typename T>
-void test_vector_integer_type(C & container, int size, T min, T max)
+template<typename C>
+void test_vector_integer_type(C & container, int size,
+  typename C::value_type min, typename C::value_type max)
 {
   std::default_random_engine rand_generator;
-  std::uniform_int_distribution<T> randnum(min, max);
+  std::uniform_int_distribution<typename C::value_type> randnum(min, max);
 
   if (size > 0) {
     container[0] = min;
@@ -58,11 +59,12 @@ void test_vector_integer_type(C & container, int size, T min, T max)
  * Helper function to generate a test pattern for float number types.
  * Mininum and maximum values for the type and random numbers in the middle.
  */
-template<typename C, typename T>
-void test_vector_float_type(C & container, int size, T min, T max)
+template<typename C>
+void test_vector_float_type(C & container, int size,
+  typename C::value_type min, typename C::value_type max)
 {
   std::default_random_engine rand_generator;
-  std::uniform_real_distribution<T> randnum(min, max);
+  std::uniform_real_distribution<typename C::value_type> randnum(min, max);
 
   if (size > 0) {
     container[0] = min;

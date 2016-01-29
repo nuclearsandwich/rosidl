@@ -21,9 +21,11 @@
 /**
  * Helper function to generate a test pattern for boolean type.
  * Alternating true (even index) and false (odd index) pattern.
+ * @param C Container (vector, array, etc) to be filled
+ * @param size How many elements to fill in. Must size<=container_size
  */
 template<typename C>
-void test_vector_bool(C & container, int size)
+void test_vector_bool(C & container, size_t size)
 {
   for (int i = 0; i < size; i++) {
     if ((i % 2) == 0) {
@@ -38,9 +40,13 @@ void test_vector_bool(C & container, int size)
  * Helper function to generate a test pattern for integer number types.
  * The template type parameter must be an integer number type.
  * Mininum and maximum values for the type and random values in the middle.
+ * @param C Container (vector, array, etc) to be filled
+ * @param size How many elements to fill in. Must size<=container_size
+ * @param min Minimum value in the rage to fill.
+ * @param max Maximum value in the rage to fill.
  */
 template<typename C>
-void test_vector_integer_type(C & container, int size,
+void test_vector_integer_type(C & container, size_t size,
   typename C::value_type min, typename C::value_type max)
 {
   std::default_random_engine rand_generator;
@@ -58,9 +64,13 @@ void test_vector_integer_type(C & container, int size,
 /**
  * Helper function to generate a test pattern for float number types.
  * Mininum and maximum values for the type and random numbers in the middle.
+ * @param C Container (vector, array, etc) to be filled
+ * @param size How many elements to fill in. Must size<=container_size
+ * @param min Minimum value in the rage to fill.
+ * @param max Maximum value in the rage to fill.
  */
 template<typename C>
-void test_vector_float_type(C & container, int size,
+void test_vector_float_type(C & container, size_t size,
   typename C::value_type min, typename C::value_type max)
 {
   std::default_random_engine rand_generator;
@@ -75,4 +85,4 @@ void test_vector_float_type(C & container, int size,
   }
 }
 
-#endif
+#endif  // TEST_ARRAY_GENERATOR_HPP_

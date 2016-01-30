@@ -24,6 +24,7 @@
 #include "rosidl_generator_c/primitives_array_functions.h"
 #include "rosidl_generator_c/string_functions.h"
 
+#include "rosidl_generator_c/msg/constants.h"
 #include "rosidl_generator_c/msg/various.h"
 #include "rosidl_generator_c/msg/bool.h"
 #include "rosidl_generator_c/msg/byte.h"
@@ -88,6 +89,7 @@ void test_primitives(void)
 {
   rosidl_generator_c__msg__Bool bool_msg;
   rosidl_generator_c__msg__Byte byte_msg;
+  rosidl_generator_c__msg__Constants constants_msg;
   rosidl_generator_c__msg__Char char_msg;
   rosidl_generator_c__msg__Float32 float32_msg;
   rosidl_generator_c__msg__Float64 float64_msg;
@@ -111,6 +113,10 @@ void test_primitives(void)
 
   byte_msg.empty_byte = 255;
   assert(byte_msg.empty_byte == 255);
+
+  assert(rosidl_generator_c__msg__Constants__X == 123);
+  assert(rosidl_generator_c__msg__Constants__Y == -123);
+  assert(strncmp(rosidl_generator_c__msg__Constants__FOO, "foo", 3) == 0);
 
   char_msg.empty_char = CHAR_MIN;
   assert(char_msg.empty_char == CHAR_MIN);

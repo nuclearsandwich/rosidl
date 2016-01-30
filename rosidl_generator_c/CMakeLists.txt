@@ -34,6 +34,7 @@ if(AMENT_ENABLE_TESTING)
   ament_lint_auto_find_test_dependencies()
 
   set(message_files
+    "msg/Constants.msg"
     "msg/Empty.msg"
     "msg/Nested.msg"
     "msg/Primitives.msg"

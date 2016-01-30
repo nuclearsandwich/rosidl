@@ -106,7 +106,7 @@ enum
 @{
 name = key.split()[1]
 }@
-static const @(key);
+static const char * @(name) = @(value);
 @[else]@
 static const @(key) = @(value);
 @[end if]@

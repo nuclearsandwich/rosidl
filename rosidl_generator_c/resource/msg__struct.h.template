@@ -76,11 +76,6 @@ for constant in spec.constants:
             '%s %s' % (MSG_TYPE_TO_C[constant.type], msg_typename + '__' + constant.name),
             primitive_value_to_c(constant.type, constant.value),
         ))
-        if constant.type == 'string':
-            constant_names = includes.setdefault('rosidl_generator_c/string.h', [])
-            constant_names.append(constant.name)
-            constant_names = includes.setdefault('rosidl_generator_c/string_functions.h', [])
-            constant_names.append(constant.name)
 }@
 @[if includes]@
 // include message dependencies

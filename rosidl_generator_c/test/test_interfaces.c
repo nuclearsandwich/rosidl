@@ -89,7 +89,6 @@ void test_primitives(void)
 {
   rosidl_generator_c__msg__Bool bool_msg;
   rosidl_generator_c__msg__Byte byte_msg;
-  rosidl_generator_c__msg__Constants constants_msg;
   rosidl_generator_c__msg__Char char_msg;
   rosidl_generator_c__msg__Float32 float32_msg;
   rosidl_generator_c__msg__Float64 float64_msg;

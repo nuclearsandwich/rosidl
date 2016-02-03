@@ -108,79 +108,35 @@ TEST(Test_rosidl_generator_traits, has_fixed_size) {
     "UnboundedArrayUnbounded::has_fixed_size is true");
 }
 
+#define TEST_PRIMITIVE_FIELD_ASSIGNMENT(FieldName, InitialValue, FinalValue) \
+  message.FieldName = InitialValue;\
+  ASSERT_EQ(InitialValue, message.FieldName);\
+  message.FieldName = FinalValue;\
+  ASSERT_EQ(FinalValue, message.bool_value);
+
 TEST(Test_messages, primitives_static) {
   rosidl_generator_cpp::msg::PrimitivesStatic message;
 
-  message.bool_value = false;
-  ASSERT_EQ(false, message.bool_value);
-  message.bool_value = true;
-  ASSERT_EQ(true, message.bool_value);
-
-  message.byte_value = 0;
-  ASSERT_EQ(0, message.byte_value);
-  message.byte_value = 255;
-  ASSERT_EQ(255, message.byte_value);
-
-  message.char_value = CHAR_MIN;
-  ASSERT_EQ(CHAR_MIN, message.char_value);
-  message.char_value = CHAR_MAX;
-  ASSERT_EQ(CHAR_MAX, message.char_value);
-
-  message.float32_value = FLT_MIN;
-  ASSERT_EQ(FLT_MIN, message.float32_value);
-  message.float32_value = FLT_MAX;
-  ASSERT_EQ(FLT_MAX, message.float32_value);
-
-  message.float64_value = DBL_MIN;
-  ASSERT_EQ(DBL_MIN, message.float64_value);
-  message.float64_value = DBL_MAX;
-  ASSERT_EQ(DBL_MAX, message.float64_value);
-
-  message.int8_value = INT8_MIN;
-  ASSERT_EQ(INT8_MIN, message.int8_value);
-  message.int8_value = INT8_MAX;
-  ASSERT_EQ(INT8_MAX, message.int8_value);
-
-  message.uint8_value = 0;
-  ASSERT_EQ(0, message.uint8_value);
-  message.uint8_value = UINT8_MAX;
-  ASSERT_EQ(UINT8_MAX, message.uint8_value);
-
-  message.int16_value = INT16_MIN;
-  ASSERT_EQ(INT16_MIN, message.int16_value);
-  message.int16_value = INT16_MAX;
-  ASSERT_EQ(INT16_MAX, message.int16_value);
-
-  message.uint16_value = 0;
-  ASSERT_EQ(0, message.uint16_value);
-  message.uint16_value = UINT16_MAX;
-  ASSERT_EQ(UINT16_MAX, message.uint16_value);
-
-  message.int32_value = INT32_MIN;
-  ASSERT_EQ(INT32_MIN, message.int32_value);
-  message.int32_value = INT32_MAX;
-  ASSERT_EQ(INT32_MAX, message.int32_value);
-
-  message.uint32_value = 0;
-  ASSERT_EQ(0, message.uint32_value);
-  message.uint32_value = UINT32_MAX;
-  ASSERT_EQ(UINT32_MAX, message.uint32_value);
-
-  message.int64_value = INT64_MIN;
-  ASSERT_EQ(INT64_MIN, message.int64_value);
-  message.int64_value = INT64_MAX;
-  ASSERT_EQ(INT64_MAX, message.int64_value);
-
-  message.uint64_value = 0;
-  ASSERT_EQ(0, message.uint64_value);
-  message.uint64_value = UINT64_MAX;
-  ASSERT_EQ(UINT64_MAX, message.uint64_value);
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(bool_value, false, true)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(byte_value, 0, 255)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(char_value, CHAR_MIN, CHAR_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(float32_value, FLT_MIN, FLT_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(float64_value, DBL_MIN, DBL_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(int8_value, INT8_MIN, INT8_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(uint8_value, 0, UINT8_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(int16_value, INT16_MIN, INT16_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(uint16_value, 0, UINT16_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(int32_value, INT32_MIN, INT32_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(uint32_value, 0, UINT32_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(int64_value, INT64_MIN, INT64_MAX)
+  TEST_PRIMITIVE_FIELD_ASSIGNMENT(uint64_value, 0, UINT64_MAX)
 }
 
 // Primitives bounded arrays
 TEST(Test_messages, primitives_bounded) {
   rosidl_generator_cpp::msg::PrimitivesBounded message;
 
+  // TODO Macros
   // bool
   std::array<bool, TEST_VECTOR_SIZE> pattern_bool;
   test_vector_bool<decltype(pattern_bool)>(pattern_bool, TEST_VECTOR_SIZE);

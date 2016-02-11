@@ -14,20 +14,21 @@ ament_export_dependencies(rosidl_generator_c)
 # The reason the impl folder is exported is that it contains the implementation
 # for the get_*_type_support_handle functions and defines the opensplice
 # specific version of these functions.
+# ooh maybe not though
 ament_export_include_directories(include include/${PROJECT_NAME}/impl)
 
 ament_python_install_package(${PROJECT_NAME})
 
-add_library(${PROJECT_NAME} SHARED src/identifier.c)
-if(WIN32)
-  target_compile_definitions(${PROJECT_NAME}
-    PRIVATE "ROSIDL_TYPESUPPORT_INTROSPECTION_C_BUILDING_DLL")
-endif()
-target_include_directories(${PROJECT_NAME}
-  PUBLIC
-  include
-)
-ament_export_libraries(${PROJECT_NAME})
+# add_library(${PROJECT_NAME} SHARED src/identifier.c)
+# if(WIN32)
+#   target_compile_definitions(${PROJECT_NAME}
+#     PRIVATE "ROSIDL_TYPESUPPORT_INTROSPECTION_C_BUILDING_DLL")
+# endif()
+# target_include_directories(${PROJECT_NAME}
+#   PUBLIC
+#   include
+# )
+# ament_export_libraries(${PROJECT_NAME})
 
 if(AMENT_ENABLE_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -42,17 +43,18 @@ install(
   PROGRAMS bin/rosidl_typesupport_introspection_c
   DESTINATION lib/rosidl_typesupport_introspection_c
 )
+
 install(
   DIRECTORY cmake resource
   DESTINATION share/${PROJECT_NAME}
 )
-install(
-  DIRECTORY include/
-  DESTINATION include
-)
-install(
-  TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
+#install(
+#  DIRECTORY include/
+#  DESTINATION include
+#)
+#install(
+#  TARGETS ${PROJECT_NAME}
+#  ARCHIVE DESTINATION lib
+#  LIBRARY DESTINATION lib
+#  RUNTIME DESTINATION bin
+#)

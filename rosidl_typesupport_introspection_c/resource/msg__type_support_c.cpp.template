@@ -1,4 +1,4 @@
-// generated from rosidl_typesupport_introspection_cpp/resource/msg__type_support.cpp.template
+// generated from rosidl_typesupport_introspection_c/resource/msg__type_support_c.cpp.template
 
 @#######################################################################
 @# EmPy template for generating <msg>__type_support.cpp files
@@ -48,9 +48,6 @@ size_t size_function__@(spec.base_type.type)__@(field.name)(const void * untyped
   (void)untyped_member;
   return @(field.type.array_size);
 @[else]@
-  // const std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> * member =
-  //   reinterpret_cast<const std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> *>(untyped_member);
-  //return member->size();
   const @(field.type.pkg_name)__@(field.type.type)__Array * member =
     reinterpret_cast<const @(field.type.pkg_name)__@(field.type.type)__Array *>(untyped_member);
   return member->size;
@@ -61,28 +58,33 @@ const void * get_const_function__@(spec.base_type.type)__@(field.name)(const voi
 {
   const @(field.type.pkg_name)__@(field.type.type)_Array * member =
     reinterpret_cast<const @(field.type.pkg_name)__@(field.type.type)_Array *>(untyped_member);
+  if (index >= member->capacity) {
+    // TODO Error string?
+    return nullptr;
+  }
   return &member[index];
 }
 
-// TODO
 void * get_function__@(spec.base_type.type)__@(field.name)(void * untyped_member, size_t index)
 {
-@[if field.type.array_size and not field.type.is_upper_bound]@
-  @(field.type.pkg_name)::msg::@(field.type.type) * member =
-    reinterpret_cast<@(field.type.pkg_name)::msg::@(field.type.type) *>(untyped_member);
-@[else]@
-  std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> & member =
-    *reinterpret_cast<std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> *>(untyped_member);
-@[end if]@
+  @(field.type.pkg_name)__@(field.type.type)__Array * member =
+    reinterpret_cast<@(field.type.pkg_name)__@(field.type.type)__Array *>(untyped_member);
+  if (index >= member->capacity) {
+    // TODO Error string?
+    return nullptr;
+  }
   return &member[index];
 }
 
 @[if not field.type.array_size or field.type.is_upper_bound]@
 void resize_function__@(spec.base_type.type)__@(field.name)(void * untyped_member, size_t size)
 {
+  // TODO
+/*
   std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> * member =
     reinterpret_cast<std::vector<@(field.type.pkg_name)::msg::@(field.type.type)> *>(untyped_member);
   member->resize(size);
+*/
 }
 
 @[end if]@

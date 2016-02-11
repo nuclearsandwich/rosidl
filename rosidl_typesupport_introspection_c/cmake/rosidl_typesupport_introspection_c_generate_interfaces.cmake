@@ -23,11 +23,11 @@ foreach(_idl_file ${rosidl_generate_interfaces_IDL_FILES})
     get_filename_component(_parent_folder "${_parent_folder}" NAME)
     get_filename_component(_msg_name "${_idl_file}" NAME_WE)
     string_camel_case_to_lower_case_underscore("${_msg_name}" _header_name)
-    list(APPEND _generated_header_files
-      "${_output_path}/${_parent_folder}/${_header_name}__introspection_type_support.h"
-    )
+    # list(APPEND _generated_header_files
+    #   "${_output_path}/${_parent_folder}/${_header_name}__introspection_type_support.h"
+    # )
     list(APPEND _generated_source_files
-      "${_output_path}/${_parent_folder}/${_header_name}__type_support.c"
+      "${_output_path}/${_parent_folder}/${_header_name}__type_support_c.cpp"
     )
   elseif("${_extension} " STREQUAL ".srv ")
     # no generated code for services
@@ -54,9 +54,8 @@ endforeach()
 set(target_dependencies
   "${rosidl_typesupport_introspection_c_BIN}"
   ${rosidl_typesupport_introspection_c_GENERATOR_FILES}
-  "${rosidl_typesupport_introspection_c_TEMPLATE_DIR}/msg__introspection_type_support.h.template"
-  "${rosidl_typesupport_introspection_c_TEMPLATE_DIR}/msg__type_support.c.template"
-  "${rosidl_typesupport_introspection_c_TEMPLATE_DIR}/srv__type_support.c.template"
+  "${rosidl_typesupport_introspection_c_TEMPLATE_DIR}/msg__type_support_c.cpp.template"
+  # "${rosidl_typesupport_introspection_c_TEMPLATE_DIR}/srv__type_support.c.template"
   ${rosidl_generate_interfaces_IDL_FILES}
   ${_dependency_files})
 foreach(dep ${target_dependencies})

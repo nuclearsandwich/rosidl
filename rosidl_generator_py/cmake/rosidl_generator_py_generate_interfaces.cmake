@@ -148,6 +148,22 @@ if(NOT "${_generated_msg_py_files} " STREQUAL " ")
   get_filename_component(_msg_package_dir2 "${_msg_package_dir1}" NAME)
 endif()
 
+set(_generated_extension_files "")
+set(_extension_dependencies "")
+set(_target_suffix "__py")
+
+add_custom_command(
+  # OUTPUT ${_generated_msg_py_files} ${_generated_msg_c__${_typesupport_impl}_files} ${_generated_srv_files}
+  OUTPUT ${_generated_msg_py_files} ${_generated_msg_c_files} ${_generated_srv_files}
+  COMMAND ${PYTHON_EXECUTABLE} ${rosidl_generator_py_BIN}
+  --generator-arguments-file "${generator_arguments_file}"
+  --typesupport-impl "${_typesupport_impl}"
+  --typesupport-impls "${_typesupport_impls}"
+  DEPENDS ${target_dependencies}
+  COMMENT "Generating Python code for ROS interfaces"
+  VERBATIM
+)
+
 if(NOT rosidl_generate_interfaces_SKIP_INSTALL)
   ament_python_install_module("${_output_path}/__init__.py"
     DESTINATION "${PROJECT_NAME}"
@@ -164,22 +180,6 @@ if(NOT rosidl_generate_interfaces_SKIP_INSTALL)
     DESTINATION "${PYTHON_INSTALL_DIR}/${PROJECT_NAME}/${_msg_package_dir2}"
   )
 endif()
-
-set(_generated_extension_files "")
-set(_extension_dependencies "")
-set(_target_suffix "__py")
-
-add_custom_command(
-  # OUTPUT ${_generated_msg_py_files} ${_generated_msg_c__${_typesupport_impl}_files} ${_generated_srv_files}
-  OUTPUT ${_generated_msg_py_files} ${_generated_msg_c_files} ${_generated_srv_files}
-  COMMAND ${PYTHON_EXECUTABLE} ${rosidl_generator_py_BIN}
-  --generator-arguments-file "${generator_arguments_file}"
-  --typesupport-impl "${_typesupport_impl}"
-  --typesupport-impls "${_typesupport_impls}"
-  DEPENDS ${target_dependencies}
-  COMMENT "Generating Python code for ROS interfaces"
-  VERBATIM
-)
 
 macro(set_properties _build_type)
   set_target_properties(${_msg_name}${_pyext_suffix} PROPERTIES

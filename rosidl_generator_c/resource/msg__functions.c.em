@@ -81,7 +81,9 @@ for field in spec.fields:
         # non-array field
         if field.type.is_primitive_type():
             if field.type.type == 'string':
-                lines.append('rosidl_generator_c__String__init(&msg->%s);' % field.name)
+                lines.append('if (!rosidl_generator_c__String__init(&msg->%s)) {' % field.name)
+                lines.append(' return false;')
+                lines.append('}')
                 if field.default_value is not None:
                     lines.append('{')
                     value = value_to_c(field.type, field.default_value)
@@ -101,7 +103,9 @@ for field in spec.fields:
 
         else:
             # initialize the sub message
-            lines.append('%s__%s__%s__init(&msg->%s);' % (field.type.pkg_name, 'msg', field.type.type, field.name))
+            lines.append('if (!%s__%s__%s__init(&msg->%s)) {' % (field.type.pkg_name, 'msg', field.type.type, field.name))
+            lines.append('  return false;')
+            lines.append('}')
 
     elif field.type.is_fixed_size_array():
         if field.type.is_primitive_type() and field.type.type != 'string':

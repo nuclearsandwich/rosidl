@@ -25,8 +25,9 @@ rosidl_generator_c__String__init(rosidl_generator_c__String * str)
   if (!str) {
     return false;
   }
-  str->data = malloc(1);
+  str->data = (char *)malloc(1);
   if (!str->data) {
+    fprintf(stderr, "Failed to allocate memory for rosidl_generator_c__String\n");
     return false;
   }
   str->data[0] = '\0';
@@ -48,10 +49,8 @@ rosidl_generator_c__String__fini(rosidl_generator_c__String * str)
         "Exiting.\n");
       exit(-1);
     }
-    if (str->data) {
-      free(str->data);
-      str->data = NULL;
-    }
+    free(str->data);
+    str->data = NULL;
     str->size = 0;
     str->capacity = 0;
   } else {
@@ -62,7 +61,7 @@ rosidl_generator_c__String__fini(rosidl_generator_c__String * str)
       exit(-1);
     }
     if (0 != str->capacity) {
-      fprintf(stderr, "Unexpected behavior: srring capacity was non-zero for deallocated data! "
+      fprintf(stderr, "Unexpected behavior: string capacity was non-zero for deallocated data! "
         "Exiting.\n");
       exit(-1);
     }
@@ -82,10 +81,12 @@ rosidl_generator_c__String__assignn(
   }
   // since n + 1 bytes are being allocated n can't be the maximum value
   if (n == SIZE_MAX) {
+    fprintf(stderr, "Failed to assign string because desired length was too large\n");
     return false;
   }
   char * data = (char *)malloc(n + 1);
   if (!data) {
+    fprintf(stderr, "Couldn't allocate data for new string\n");
     return false;
   }
   rosidl_generator_c__String__fini(str);
@@ -102,10 +103,12 @@ rosidl_generator_c__String__assign(
   rosidl_generator_c__String * str, const char * value)
 {
   if (!str) {
+    fprintf(stderr, "Couldn't assign string because destination was null\n");
     return false;
   }
   // a NULL value is not valid
   if (!value) {
+    fprintf(stderr, "Couldn't assign string because source was null\n");
     return false;
   }
   return rosidl_generator_c__String__assignn(
@@ -127,7 +130,9 @@ rosidl_generator_c__String__Array__init(
     }
     // initialize all array elements
     for (size_t i = 0; i < size; ++i) {
-      rosidl_generator_c__String__init(&data[i]);
+      if (!rosidl_generator_c__String__init(&data[i])) {
+        return false;
+      }
     }
   }
   array->data = data;

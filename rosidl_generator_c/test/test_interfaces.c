@@ -38,6 +38,7 @@
 #include "rosidl_generator_c/msg/primitives_bounded_arrays__struct.h"
 #include "rosidl_generator_c/msg/primitives_static_arrays__struct.h"
 #include "rosidl_generator_c/msg/primitives_unbounded_arrays__struct.h"
+#include "rosidl_generator_c/msg/string_arrays__struct.h"
 #include "rosidl_generator_c/msg/strings__struct.h"
 #include "rosidl_generator_c/msg/telegram1__struct.h"
 #include "rosidl_generator_c/msg/telegram2__struct.h"
@@ -62,6 +63,7 @@
 #include "rosidl_generator_c/msg/primitives_bounded_arrays__functions.h"
 #include "rosidl_generator_c/msg/primitives_static_arrays__functions.h"
 #include "rosidl_generator_c/msg/primitives_unbounded_arrays__functions.h"
+#include "rosidl_generator_c/msg/string_arrays__functions.h"
 #include "rosidl_generator_c/msg/strings__functions.h"
 #include "rosidl_generator_c/msg/telegram1__functions.h"
 #include "rosidl_generator_c/msg/telegram2__functions.h"
@@ -74,7 +76,10 @@
 
 #define TEST_STRING \
   "Deep into that darkness peering, long I stood there wondering, fearing"
-
+#define TEST_STRING2 \
+  "The quick brown fox jumps over the lazy dog."
+#define TEST_STRING3 \
+  "Six of the women quietly gave back prizes to the judge."
 #define ARRAY_SIZE 7
 
 #define EXPECT_EQ(arg1, arg2) if (arg1 != arg2) return 1
@@ -83,6 +88,8 @@
 int test_primitives(void);
 int test_primitives_default_value(void);
 int test_strings(void);
+int test_string_arrays(void);
+int test_string_arrays_default_value(void);
 int test_primitives_unbounded_arrays(void);
 int test_primitives_bounded_arrays(void);
 int test_primitives_static_arrays(void);
@@ -125,6 +132,16 @@ int main(void)
   printf("Testing nested sub-messages...\n");
   if (test_submessages()) {
     fprintf(stderr, "test_submessages() FAILED\n");
+    rc++;
+  }
+  printf("Testing string arrays...\n");
+  if (test_string_arrays()) {
+    fprintf(stderr, "test_string_arrays() FAILED\n");
+    rc++;
+  }
+  printf("Testing string arrays with default values...\n");
+  if (test_string_arrays_default_value()) {
+    fprintf(stderr, "test_string_arrays_default_value() FAILED\n");
     rc++;
   }
   if (rc != 0) {
@@ -299,6 +316,109 @@ int test_strings(void)
 
   return 0;
 }
+
+
+/**
+ * Test message with different string array types.
+ */
+int test_string_arrays(void)
+{
+  bool res = false;
+  rosidl_generator_c__msg__StringArrays * strings = rosidl_generator_c__msg__StringArrays__create();
+
+  res = rosidl_generator_c__msg__StringArrays__init(strings);
+  EXPECT_EQ(res, true);
+
+  rosidl_generator_c__String__Array__init(&strings->string_dynamic_array_value, 3);
+  res = rosidl_generator_c__String__assign(
+    &strings->string_dynamic_array_value.data[0], TEST_STRING);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_dynamic_array_value.data[0].data, TEST_STRING));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_dynamic_array_value.data[1], TEST_STRING2);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_dynamic_array_value.data[1].data, TEST_STRING2));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_dynamic_array_value.data[2], TEST_STRING3);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_dynamic_array_value.data[2].data, TEST_STRING3));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_static_array_value[0], TEST_STRING);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_static_array_value[0].data, TEST_STRING));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_static_array_value[1], TEST_STRING2);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_static_array_value[1].data, TEST_STRING2));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_static_array_value[2], TEST_STRING3);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_static_array_value[2].data, TEST_STRING3));
+
+  rosidl_generator_c__String__Array__init(&strings->string_bounded_array_value, 4);
+  res = rosidl_generator_c__String__assign(
+    &strings->string_bounded_array_value.data[0], TEST_STRING);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_bounded_array_value.data[0].data, TEST_STRING));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_bounded_array_value.data[1], TEST_STRING2);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_bounded_array_value.data[1].data, TEST_STRING2));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_bounded_array_value.data[2], TEST_STRING3);
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_bounded_array_value.data[2].data, TEST_STRING3));
+
+  res = rosidl_generator_c__String__assign(
+    &strings->string_bounded_array_value.data[3], "Hello World!");
+  EXPECT_EQ(true, res);
+  EXPECT_EQ(0, strcmp(strings->string_bounded_array_value.data[3].data, "Hello World!"));
+
+  rosidl_generator_c__msg__StringArrays__destroy(strings);
+
+  return 0;
+}
+
+/**
+ * Test different string array types using a default value initializer.
+ */
+int test_string_arrays_default_value(void)
+{
+  rosidl_generator_c__msg__StringArrays * string_arrays = NULL;
+
+  string_arrays = rosidl_generator_c__msg__StringArrays__create();
+
+  EXPECT_NE(string_arrays, NULL);
+
+  bool res = rosidl_generator_c__msg__StringArrays__init(string_arrays);
+  EXPECT_EQ(true, res);
+
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_static_array_value[0].data, "Hello"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_static_array_value[1].data, "World"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_static_array_value[2].data, "!"));
+
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_dynamic_array_value.data[0].data, "What"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_dynamic_array_value.data[1].data, "a"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_dynamic_array_value.data[2].data, "wonderful"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_dynamic_array_value.data[3].data, "world"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_dynamic_array_value.data[4].data, "!"));
+
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_bounded_array_value.data[0].data, "Hello"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_bounded_array_value.data[1].data, "World"));
+  EXPECT_EQ(0, strcmp(string_arrays->def_string_bounded_array_value.data[2].data, "!"));
+
+  rosidl_generator_c__msg__StringArrays__destroy(string_arrays);
+
+  return 0;
+}
+
 
 /**
  * Test message with different unbounded array types

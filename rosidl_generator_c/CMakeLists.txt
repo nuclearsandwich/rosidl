@@ -59,6 +59,7 @@ if(BUILD_TESTING)
     "msg/Uint64.msg"
     "msg/PrimitiveValues.msg"
     "msg/Strings.msg"
+    "msg/StringArrays.msg"
     "msg/PrimitivesUnboundedArrays.msg"
     "msg/PrimitivesBoundedArrays.msg"
     "msg/PrimitivesStaticArrays.msg"

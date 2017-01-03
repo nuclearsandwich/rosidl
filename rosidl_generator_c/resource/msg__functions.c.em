@@ -109,7 +109,6 @@ for field in spec.fields:
                 # set default value for each array element
                 for i, default_value in enumerate(field.default_value):
                     lines.append('msg->%s[%d] = %s;' % (field.name, i, primitive_value_to_c(field.type.type, field.default_value[i])))
-
         if not field.type.is_primitive_type() or field.type.type == 'string':
             # initialize each array element
             lines.append('for (size_t i = 0; i < %d; ++i) {' % field.type.array_size)

@@ -109,11 +109,27 @@ for field in spec.fields:
                 # set default value for each array element
                 for i, default_value in enumerate(field.default_value):
                     lines.append('msg->%s[%d] = %s;' % (field.name, i, primitive_value_to_c(field.type.type, field.default_value[i])))
+
         if not field.type.is_primitive_type() or field.type.type == 'string':
             # initialize each array element
             lines.append('for (size_t i = 0; i < %d; ++i) {' % field.type.array_size)
             lines.append('  %s__init(&msg->%s[i]);' % (get_typename_of_base_type(field.type), field.name))
             lines.append('}')
+
+            if field.default_value is not None:
+                for i, default_value in enumerate(field.default_value):
+                    if field.type.type == 'string':
+                        lines.append('{')
+                        lines.append('  bool success = rosidl_generator_c__String__assign(&msg->%s[%d], "%s");' % (field.name, i, field.default_value[i]))
+                        lines.append('  if (!success) {')
+                        lines.append('    goto %s%s;' % (label_prefix, last_label_index))
+                        abort_lines[0:0] = [
+                          '  rosidl_generator_c__String__fini(&msg->%s[%d]);' % (field.name, i),
+                          '%s%d:' % (label_prefix, last_label_index),
+                        ]
+                        last_label_index += 1
+                        lines.append('  }')
+                        lines.append('}')
 
     else:
         if field.default_value is None:
@@ -134,7 +150,20 @@ for field in spec.fields:
             lines.append('}')
             # set default value for each array element
             for i, default_value in enumerate(field.default_value):
-                lines.append('msg->%s.data[%d] = %s;' % (field.name, i, primitive_value_to_c(field.type.type, field.default_value[i])))
+                if field.type.type == 'string':
+                    lines.append('{')
+                    lines.append('  bool success = rosidl_generator_c__String__assign(&msg->%s.data[%d], "%s");' % (field.name, i, field.default_value[i]))
+                    lines.append('  if (!success) {')
+                    lines.append('    goto %s%s;' % (label_prefix, last_label_index))
+                    abort_lines[0:0] = [
+                      '  rosidl_generator_c__String__fini(&msg->%s.data[%d]);' % (field.name, i),
+                      '%s%d:' % (label_prefix, last_label_index),
+                    ]
+                    last_label_index += 1
+                    lines.append('  }')
+                    lines.append('}')
+                else:
+                    lines.append('msg->%s.data[%d] = %s;' % (field.name, i, primitive_value_to_c(field.type.type, field.default_value[i])))
 
 for line in lines:
     print('  ' + line)

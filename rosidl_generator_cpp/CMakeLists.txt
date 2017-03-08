@@ -54,9 +54,10 @@ if(BUILD_TESTING)
   rosidl_generate_interfaces(${PROJECT_NAME} ${message_files}
     SKIP_INSTALL
   )
-
-  if(NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Wextra -Wpedantic")
+  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-Wall -Wextra -Wpedantic)
   endif()
 
   include_directories(include)
